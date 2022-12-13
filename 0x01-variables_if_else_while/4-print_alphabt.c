@@ -2,7 +2,7 @@
 #include <stdlib.h>
 
 /**
- * main - returns alphabets both except e and q
+ * main - returns alphabets both except e ans q
  *
  * Return: Always 0 (Success)
  */
@@ -16,7 +16,7 @@ int main(void)
 	{
 		if ((ch != 'e') && (ch != 'q'))
 		{
-			putchar(ch) ;
+			putchar(ch);
 		}
 		ch++;
 	}

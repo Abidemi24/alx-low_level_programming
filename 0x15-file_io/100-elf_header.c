@@ -239,7 +239,7 @@ void print_entry(unsigned long int e_entry, unsigned char *e_ident)
 		printf("%#x\n", (unsigned int)e_entry);
 
 	else
-		printf("%#1lx\n", e_entry);
+		printf("%#lx\n", e_entry);
 }
 
 /**
@@ -284,9 +284,18 @@ int main(int __attribute__((__unused__)) argc, char *argv[])
 	if (header == NULL)
 	{
 		close_elf(o);
-		dprintf(STDERR_FILENO, "Error: '%s': No such file\n", argv[1]);
+		dprintf(STDERR_FILENO, "Error: Can't read file %s\n", argv[1]);
 		exit(98);
 	}
+	r = read(o, header, sizeof(Elf64_Ehdr));
+	if (r == -1)
+	{
+		free(header);
+		close_elf(o);
+		dprintf(STDERR_FILENO, "Error: `%s`: No such file\n", argv[1]);
+		exit(98);
+	}
+
 	check_elf(header->e_ident);
 	printf("ELF Header:\n");
 	print_magic(header->e_ident);

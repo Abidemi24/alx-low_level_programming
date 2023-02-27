@@ -1,4 +1,4 @@
-nclude "main.h"
+#include "main.h"
 
 /**
  * _strpbrk - finds first matching char in string
